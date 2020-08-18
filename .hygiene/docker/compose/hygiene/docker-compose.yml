@@ -10,6 +10,7 @@ services:
       - LC_ALL=en_US.UTF-8
       - LANG=en_US.UTF-8
       - LANGUAGE=en_US.UTF-8
+      - HYGIENE_TEST_SUBDIR=.hygiene/tests
       - ONTPUB_SUBDIR=/ontology
       - ONTPUB_EXCLUDED=/archived
       - WORKSPACE
