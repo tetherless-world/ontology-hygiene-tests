@@ -16,43 +16,27 @@ Check the root directory of your repository. You should have (alogside your own 
 | .circleci
 | | config.yml
 | .hygiene
-| | docker/compose/hygiene
-| | - docker-compose.yml
 | | tests
 | | - (a list of .sparql files)
+| | copy-results.sh
 | | copy-to-container.sh
 | | create-directories.sh
+| | docker-compose.yml
 | | start-container.sh
+| | set_env.sh
 ```
 
 ## Configuring
 
 ### Update references
-Update the following contents to meet your needs
-1. In `.hygiene/docker/compose/hygiene/docker-compose.yml`
-- Change line 7 from `- ONTPUB_FAMILY=${ONTPUB_FAMILY:-ontology-hygiene-tests}` to match your repository name. If the name is `my-repo` it should be `- ONTPUB_FAMILY=${ONTPUB_FAMILY:-my-repo}`
-- Change line 13 from `- ONTPUB_SUBDIR=/ontology` to match the directory your ontologies reside. If the dir is `my_ontologies` it should be `- ONTPUB_SUBDIR=/my_ontologies`
-- Change line 14 from `- ONTPUB_EXCLUDED=/archived` to match the directory you want to exclude from the tests. If the dir is `exclude` it shoule be `- ONTPUB_EXCLUDED=/exclude`
-
-2. In `.hygiene/copy-to-container.sh`
-- Change line 3 from `docker cp . hygiene:/input/ontology-hygiene-tests` to match your repository name. If the name is `my-repo` it should be `docker cp . hygiene:/input/my-repo`
-
-3. In `.circleci/config.yml`
-- Change the line `working_directory: /git/ontology-hygiene-tests` to match your repository name. If the name is `my-repo` it should be `working_directory: /git/my-repo`
-- Change this block
-```
-      - run:
-          name: Copy tests results back
-          command: |
-            docker cp hygiene:/output/ontology-hygiene-tests /output
-```
-to match your repository name. If the name is `my-repo` it should be
-```
-      - run:
-          name: Copy tests results back
-          command: |
-            docker cp hygiene:/output/my-repo /output
-```
+Update the following variables in `.hygiene/set_env.sh` to suit your project.
+- `ONTPUB_SUBDIR` -
+  This should be a relative path to the directory where your ontology sources are stored.
+  The example ontology is stored in the `ontology` directory so the example config reads: `ONTPUB_SUBDIR=ontology`.
+- `ONTPUB_EXCLUDED` -
+  If you want to exclude some ontologies from testing, set this to a substring that matches those ontologies.
+  E.g. if you don't want to test ontologies in `ontology/exclude`,
+  you can set `ONTPUB_EXCLUDED=/exclude`.
 
 ### Enable CircleCI in your repository
 You need to enable CircleCI in your repository. If it's already enabled, you can skip this step.
