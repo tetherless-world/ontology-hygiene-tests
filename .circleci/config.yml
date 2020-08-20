@@ -1,4 +1,4 @@
-version: 2
+version: 2.1
 jobs:
   hygiene_tests:
     working_directory: /git/ontology-hygiene-tests
@@ -8,31 +8,10 @@ jobs:
       - checkout
       - setup_remote_docker
       - run:
-          name: Start hygiene container
-          command: |
-            bash .hygiene/start-container.sh
-      - run:
-          name: Create needed dirs in the hygiene container
-          command: |
-            bash .hygiene/create-directories.sh
-      - run:
-          name: Copy and organize git repo in hygiene container
-          command: |
-            bash .hygiene/copy-to-container.sh
-      - run:
           name: Run hygiene tests
-          command: |
-            docker exec hygiene /publisher/publish.sh hygiene
-      - run:
-          name: Copy tests results back
-          command: |
-            bash .hygiene/copy-results.sh
-      - run:
-          name: Stop the hygiene container
-          command: |
-            cd .hygiene && docker-compose down
+          command: .hygiene/run_hygiene.sh
 workflows:
-  version: 2
+  version: 2.1
   build_and_test:
     jobs:
       - hygiene_tests

@@ -18,11 +18,8 @@ Check the root directory of your repository. You should have (alogside your own 
 | .hygiene
 | | tests
 | | - (a list of .sparql files)
-| | copy-results.sh
-| | copy-to-container.sh
-| | create-directories.sh
 | | docker-compose.yml
-| | start-container.sh
+| | run_hygiene.sh
 | | set_env.sh
 ```
 

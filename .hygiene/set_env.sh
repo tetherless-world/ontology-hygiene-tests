@@ -3,17 +3,20 @@
 set -a
 
 # Full path of the repository (defaults to the grandparent directory of this file)
-repo_dir=${repo_dir:-"$( cd "$( dirname "${BASH_SOURCE[0]}" )/.." && pwd )"}
-# Path from $repo_dir to dir containing hygiene scripts
-hygiene_dir=${hygiene_dir:-"${repo_dir}/.hygiene"}
+REPO_DIR=${REPO_DIR:-"$( cd "$( dirname "${BASH_SOURCE[0]}" )/.." && pwd )"}
+# Path from $REPO_DIR to dir containing hygiene scripts
+HYGIENE_DIR=${HYGIENE_DIR:-"${REPO_DIR}/.hygiene"}
 
-# Directory name of the repository (defaults to $repo_dir name)
-ONTPUB_FAMILY=${ONTPUB_FAMILY:-"${repo_dir##*/}"}
-# Path to the repository's parent directory (defaults to the parent of $repo_dir)
-HYGIENE_WORKSPACE=${HYGIENE_WORKSPACE:-"$(cd "${repo_dir}" && cd .. && pwd)"}
+# Path to directory where container output will be copied.
+OUTPUT_DIR=${OUTPUT_DIR:-"/output"}
+
+# Directory name of the repository (defaults to $REPO_DIR name)
+ONTPUB_FAMILY=${ONTPUB_FAMILY:-"${REPO_DIR##*/}"}
+# Path to the repository's parent directory (defaults to the parent of $REPO_DIR)
+HYGIENE_WORKSPACE=${HYGIENE_WORKSPACE:-"$(cd "${REPO_DIR}" && cd .. && pwd)"}
 
 # Relative path to the test directory
-HYGIENE_TEST_SUBDIR="$hygiene_dir/tests"
+HYGIENE_TEST_SUBDIR="$HYGIENE_DIR/tests"
 
 # Relative path to ontolgy sources
 ONTPUB_SUBDIR=ontology
