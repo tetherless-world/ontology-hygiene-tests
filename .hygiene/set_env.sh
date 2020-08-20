@@ -16,7 +16,7 @@ ONTPUB_FAMILY=${ONTPUB_FAMILY:-"${REPO_DIR##*/}"}
 HYGIENE_WORKSPACE=${HYGIENE_WORKSPACE:-"$(cd "${REPO_DIR}" && cd .. && pwd)"}
 
 # Relative path to the test directory
-HYGIENE_TEST_SUBDIR="$HYGIENE_DIR/tests"
+HYGIENE_TEST_SUBDIR=".hygiene/tests"
 
 # Relative path to ontolgy sources
 ONTPUB_SUBDIR=ontology
